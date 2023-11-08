@@ -1,23 +1,22 @@
 import * as React from 'react';
-import { NavigationContainer } from "@react-navigation/native";
-import login from './screens/login';
-import register from './screens/register';
-import mainpage from './screens/mainpage';
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+// import mainpage from './App.js';
 
-const Stack = createNativeStackNavigator(); 
+export default function MainPage() {
+  return (
+    <View style={styles.container}>
+      <Text>mainpage</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
 
-const App = () => {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name = "login" component={login} options = {{title: 'Login'}} />
-                <Stack.Screen name = "register" component={register} options = {{title:' Register', color: 'darkgreen'}} />
-                <Stack.Screen name = "mainpage" component={mainpage} options = {{title:'Mainpage', cardstyle: {backgroundColor: '#ADF4CC'}}} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
-}; 
-
-
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import './App.js';
+// import login from './App.js';
 
-export default function register() {
+export default function Login() {
   return (
     <View style={styles.container}>
       <Text>login</Text>
