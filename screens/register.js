@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 // import register from './App.js';
 
-export default function register() {
+export default function Register() {
   return (
     <View style={styles.container}>
       <Text>register</Text>
