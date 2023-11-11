@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import Login from './screens/login';
-import Register from './screens/register';
+import Register from './screens/Register';
 import MainPage from './screens/mainpage';
 import AddSong from './screens/addsong';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
