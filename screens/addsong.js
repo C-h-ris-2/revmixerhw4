@@ -6,7 +6,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function AddSong() {
   return (
     <View style={styles.container}>
-      <Text>register</Text>
+      <Text>Add a song here mother fucker</Text>
       <StatusBar style="auto" />
     </View>
   );
