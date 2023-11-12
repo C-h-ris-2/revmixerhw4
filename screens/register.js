@@ -25,10 +25,10 @@ export default function Register(){
 
   const handleRegister = () => {
     axios
-      .post('http://localhost:8080/comp333-hw3-frontend/index.php/user/create', {username, password})
+      .post('http://172.21.76.243:8080/comp333-hw3-frontend/index.php/user/create', {username, password})
       .then((response) => {
         console.log(response.data.msg);
-        localStorage.setItem("username", username)
+        // localStorage.setItem("username", username)
       })
       .catch((error) =>{
         console.error("registration failure: ", error);
