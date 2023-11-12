@@ -13,6 +13,7 @@ export default function Login({ navigation}) {
       title="Register" onPress={() => navigation.navigate("Register")}
       />
       <Button title="AddSong" onPress={() => navigation.navigate("AddSong")}/>
+      <Button title="mainpage" onPress={() => navigation.navigate("MainPage")}/>
     </View>
   );
 }
