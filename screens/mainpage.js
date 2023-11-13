@@ -18,16 +18,22 @@ export default function MainPage() {
 }
 
 const [posts, setPosts] = useState([]);
+const [addnewsong, setAddnewsong] = useState(false);
+
+const handleAdd = () => {
+  setAddnewsong(!addnewsong);
+}
 
 
 useEffect(() => {
   query();
-})
+}, [addnewsong])
 
   return (
     <View style={styles.container}>
       {/* <Text>mainpage</Text>
       <StatusBar style="auto" /> */}
+
       <DataTable>
         <DataTable.Header>
           <DataTable.Title>ID</DataTable.Title>
