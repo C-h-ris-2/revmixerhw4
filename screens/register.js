@@ -39,14 +39,12 @@ export default function Register(){
   return (
     <>
       <TextInput
-        style={styles.input}
         value={username}
         placeholder={"Username"}
         onChangeText={(text) => setUsername(text)}
         autoCapitalize={"none"}
       />
       <TextInput
-        style={styles.input}
         value={password}
         placeholder={"Password"}
         secureTextEntry
