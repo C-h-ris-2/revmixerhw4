@@ -3,6 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Flatlist} from 'react-native';
 import {DataTable } from "react-native-paper";
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // import mainpage from './App.js';
 
 export default function MainPage() {
@@ -17,6 +19,7 @@ export default function MainPage() {
     }
 }
 
+
 const [posts, setPosts] = useState([]);
 
 
@@ -25,7 +28,10 @@ useEffect(() => {
 })
 
   return (
+
     <View style={styles.container}>
+            {/* <Text title="username">Logged in as: {AsyncStorage.getItem("username")}</Text> */}
+
       {/* <Text>mainpage</Text>
       <StatusBar style="auto" /> */}
       <DataTable>
