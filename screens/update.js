@@ -3,10 +3,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 // import addsong from './App.js';
 
-export default function MainPage() {
+export default function Update() {
   return (
     <View style={styles.container}>
-      <Text>MainPage</Text>
+      <Text>Update</Text>
       <StatusBar style="auto" />
     </View>
   );
