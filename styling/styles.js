@@ -75,8 +75,9 @@ export const StyledButton = styled.TouchableOpacity`
 export const ButtonText = styled.Text`
     color: ${primary};
     font-size: 16px;
+    text-align: center;
     
-`
+`;
 
 export const StyledText = styled.TouchableOpacity`
     color: ${primary};
