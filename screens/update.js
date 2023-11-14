@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from 'react-native';
 // import addsong from './App.js';
 
 export default function Update() {
-  const[rating, setRating] = useState('');
   return (
     <View style={styles.container}>
       <Text>Update</Text>
