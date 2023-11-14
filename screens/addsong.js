@@ -1,31 +1,95 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import {
+  StyledContainer,
+  InnerContainer,
+  PageLogo,
+  PageTitle,
+  PageSubtitle,
+  StyledFormArea,
+  StyledInputLabel,
+  StyledTextInput,
+  Colors,
+  StyledButton,
+  ButtonText
+} from './../styling/styles';
 // import addsong from './App.js';
 
-export default function AddSong() {
-
+export default function AddSong({navigation}) {
+  const [username, setUsername] = useState('');
   const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
   const[rating, setRating] = useState('');
+
+  useEffect(() => {
+    const fetchUsername = async () => {
+      try {
+        const storedUsername = await AsyncStorage.getItem("username");
+        if (storedUsername) {
+          setUsername(storedUsername);
+        }
+      } catch (error) {
+        console.error('Error fetching username', error);
+      }
+    };
+
+    fetchUsername();
+  }, []);
 
   const handleAdd = () => {
     axios
     .post('http://172.21.76.243:8080/comp333-hw3-frontend/index.php/user/songinsert', {username, artist, song, rating})
     .then((response) => {
       console.log(response.data.msg);
+      navigation.navigate("MainPage");
     })
     .catch((error) => {
       console.error("Error adding new song: ", error);
     });
   };
 
+  const toCancel = () => {
+    navigation.navigate('MainPage');
+  }
+
   return (
-    <View style={styles.container}>
-      {/* <Text>Add a song here mother fucker</Text>
-      <StatusBar style="auto" /> */}
-      <TextInput value={artist} placeholder={"Username"} onChangeText={(text) => setArtist(text)} autoCapitalize={"none"}/>
-    </View>
+    <StyledContainer>
+      <InnerContainer>
+        <PageTitle>Add a new song!</PageTitle>
+        <StyledFormArea>
+          <StyledTextInput
+            style={StyledInputLabel}
+            value={artist}
+            placeholder={'Artist'}
+            onChangeText={(text) => setArtist(text)}
+            autoCapitalize={"none"}
+            />
+            <StyledTextInput
+            style={StyledInputLabel}
+            value={song}
+            placeholder={'Song'}
+            onChangeText={(text) => setSong(text)}
+            autoCapitalize={"none"}
+            />
+            <StyledTextInput
+            style={StyledInputLabel}
+            value={rating}
+            placeholder={'Rating'}
+            onChangeText={(text) => setRating(text)}
+            autoCapitalize={"none"}
+            />
+            <StyledButton onPress={() => handleAdd()}>
+              <ButtonText>Add this song!</ButtonText>
+            </StyledButton>
+            <StyledButton onPress={() => toCancel()}>
+              <ButtonText>Cancel</ButtonText>
+            </StyledButton>
+        </StyledFormArea>
+      </InnerContainer>
+    </StyledContainer>
   );
 }
 
