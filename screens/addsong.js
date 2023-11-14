@@ -1,9 +1,26 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Rating, AirbnbRating } from 'react-native-ratings';
 // import addsong from './App.js';
 
+import {
+  StyledContainer,
+  InnerContainer,
+  PageLogo,
+  PageTitle,
+  PageSubtitle,
+  StyledFormArea,
+  StyledInputLabel,
+  StyledTextInput,
+  Colors,
+  StyledButton,
+  ButtonText
+} from './../styling/styles';
+
 export default function AddSong() {
+
+  
 
   const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
@@ -21,11 +38,26 @@ export default function AddSong() {
   };
 
   return (
-    <View style={styles.container}>
-      {/* <Text>Add a song here mother fucker</Text>
-      <StatusBar style="auto" /> */}
-      <TextInput value={artist} placeholder={"Username"} onChangeText={(text) => setArtist(text)} autoCapitalize={"none"}/>
-    </View>
+    <StyledContainer>
+      <InnerContainer>
+        <PageTitle>Add A New Song!</PageTitle>
+        <StyledTextInput
+            style={StyledInputLabel}
+            value={artist}
+            placeholder={"Artist"}
+            onChangeText={(text) => setArtist(text)}
+            autoCapitalize={"none"}
+          />
+        <StyledTextInput
+          style={StyledInputLabel}
+          value={song}
+          placeholder={"Song"}
+          secureTextEntry
+          onChangeText={(text) => setSong(text)}
+        />
+        <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
+      </InnerContainer>
+    </StyledContainer>
   );
 }
 
