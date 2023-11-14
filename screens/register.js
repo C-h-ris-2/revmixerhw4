@@ -37,7 +37,7 @@ export default function Register(){
   };
 
   const signUp = () => {
-    console.loh("you have created an account!");
+    console.log("you have created an account!");
     navigation.navigate('Login');
   }
 
