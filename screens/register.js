@@ -16,7 +16,7 @@ import {
   ButtonText
 } from './../styling/styles';
 
-export default function Register(){
+export default function Register({navigation}){
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
