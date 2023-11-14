@@ -3,6 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { Rating, AirbnbRating } from 'react-native-ratings';
+
 import {
   StyledContainer,
   InnerContainer,
@@ -58,46 +60,24 @@ export default function AddSong({navigation}) {
   return (
     <StyledContainer>
       <InnerContainer>
-        <PageTitle>Add a new song!</PageTitle>
-        <StyledFormArea>
-          <StyledTextInput
+        <PageTitle>Add A New Song!</PageTitle>
+        <StyledTextInput
             style={StyledInputLabel}
             value={artist}
-            placeholder={'Artist'}
+            placeholder={"Artist"}
             onChangeText={(text) => setArtist(text)}
             autoCapitalize={"none"}
-            />
-            <StyledTextInput
-            style={StyledInputLabel}
-            value={song}
-            placeholder={'Song'}
-            onChangeText={(text) => setSong(text)}
-            autoCapitalize={"none"}
-            />
-            <StyledTextInput
-            style={StyledInputLabel}
-            value={rating}
-            placeholder={'Rating'}
-            onChangeText={(text) => setRating(text)}
-            autoCapitalize={"none"}
-            />
-            <StyledButton onPress={() => handleAdd()}>
-              <ButtonText>Add this song!</ButtonText>
-            </StyledButton>
-            <StyledButton onPress={() => toCancel()}>
-              <ButtonText>Cancel</ButtonText>
-            </StyledButton>
-        </StyledFormArea>
+          />
+        <StyledTextInput
+          style={StyledInputLabel}
+          value={song}
+          placeholder={"Song"}
+          secureTextEntry
+          onChangeText={(text) => setSong(text)}
+        />
+        <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
       </InnerContainer>
     </StyledContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

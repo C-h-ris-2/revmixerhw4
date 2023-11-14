@@ -43,6 +43,7 @@ export default function Login({navigation}) {
       } else {
           setErrMsg("Username or password is incorrect");
           console.log(response.data.code);
+          navigation.navigate('AddSong');
       }
         // localStorage.setItem("username", username)
       })
