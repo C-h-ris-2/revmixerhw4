@@ -2,8 +2,15 @@ import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Flatlist} from 'react-native';
 import {DataTable } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import axios from 'axios';
+
 // import mainpage from './App.js';
+
+import{
+  PageTitle,
+  PageSubtitle,
+} from './../styling/styles';
 
 export default function MainPage() {
 
@@ -17,16 +24,31 @@ export default function MainPage() {
     }
 }
 
+retrieveData = async () => {
+  try {
+    const usern = await 
+    AsyncStorage.getItem('username');
+    if (value !== null) {
+      console.log("We have data!!", value)
+      return value;
+    }
+  } catch (error) {}
+};  
+
 const [posts, setPosts] = useState([]);
 
 
 useEffect(() => {
+  retrieveData();
   query();
 })
 
   return (
     <View style={styles.container}>
+      <PageTitle>RevMixer</PageTitle>
+      <PageSubtitle>You are logged in as: {usern}</PageSubtitle>
       {/* <Text>mainpage</Text>
+      >
       <StatusBar style="auto" /> */}
       <DataTable>
         <DataTable.Header>
