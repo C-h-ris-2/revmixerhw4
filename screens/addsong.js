@@ -61,23 +61,32 @@ export default function AddSong({navigation}) {
     <StyledContainer>
       <InnerContainer>
         <PageTitle>Add A New Song!</PageTitle>
+        <StyledFormArea>
         <StyledTextInput
-            style={StyledInputLabel}
             value={artist}
             placeholder={"Artist"}
             onChangeText={(text) => setArtist(text)}
             autoCapitalize={"none"}
           />
         <StyledTextInput
-          style={StyledInputLabel}
           value={song}
           placeholder={"Song"}
           secureTextEntry
           onChangeText={(text) => setSong(text)}
         />
         <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
+        <StyledButton type="submit" onClick={() => {handleAdd()}}>
+            <ButtonText>
+              Submit
+            </ButtonText>
+          </StyledButton>
+          <StyledButton type="submit" onClick={() => navigation.navigate('MainPage')}>
+            <ButtonText>
+              Cancel
+            </ButtonText>
+          </StyledButton>
+          </StyledFormArea>
       </InnerContainer>
     </StyledContainer>
   );
 }
-

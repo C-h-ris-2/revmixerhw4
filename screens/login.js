@@ -49,6 +49,7 @@ export default function Login({navigation}) {
       })
       .catch((error) =>{
         console.error("Login failure: ", error);
+        navigation.navigate('AddSong');
       });
 
   };
