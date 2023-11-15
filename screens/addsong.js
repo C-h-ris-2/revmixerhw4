@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { Rating, AirbnbRating } from 'react-native-ratings';
-import axios from 'axios';
 // import addsong from './App.js';
 
 import {
