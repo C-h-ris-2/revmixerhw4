@@ -34,6 +34,7 @@ export default function Login({navigation}) {
     axios
       .post('http://172.21.76.243:8080/comp333-hw3-frontend/index.php/user/login', {username, password})
       .then((response) => {
+        
         if (response.data.code === 0){
           console.log(response.data);
           AsyncStorage.setItem("username", username);
