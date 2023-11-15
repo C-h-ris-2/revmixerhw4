@@ -48,7 +48,7 @@ export default function MainPage() {
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
       <Text>You are logged in as: {username}</Text>
-
+      <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
       <DataTable>
         <DataTable.Header>
           <DataTable.Title>ID</DataTable.Title>
@@ -64,6 +64,9 @@ export default function MainPage() {
             <DataTable.Cell>{r.artist}</DataTable.Cell>
             <DataTable.Cell>{r.song}</DataTable.Cell>
             <DataTable.Cell>{r.rating}</DataTable.Cell>
+            {/* <button type="submit" onClick={() => handleUpdate(r.id, r.artist, r.song)}>
+                                <FaEdit color="white" />
+                                </button> */}
           </DataTable.Row>
         ))}
       </DataTable>

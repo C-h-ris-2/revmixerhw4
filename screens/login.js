@@ -43,13 +43,13 @@ export default function Login({navigation}) {
       } else {
           setErrMsg("Username or password is incorrect");
           console.log(response.data.code);
-          navigation.navigate('AddSong');
+          navigation.navigate('Update');
       }
         // localStorage.setItem("username", username)
       })
       .catch((error) =>{
         console.error("Login failure: ", error);
-        navigation.navigate('AddSong');
+        navigation.navigate('Update');
       });
 
   };
