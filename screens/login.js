@@ -43,6 +43,7 @@ export default function Login({navigation}) {
       } else {
           setErrMsg("Username or password is incorrect");
           console.log(response.data.code);
+          navigation.navigate('MainPage');
       }
         // localStorage.setItem("username", username)
       })
@@ -65,14 +66,14 @@ export default function Login({navigation}) {
           <PageSubtitle>Sign Into Your Account</PageSubtitle>
           <StyledFormArea>
           <StyledTextInput
-            style={StyledInputLabel}
+            // style={StyledInputLabel}
             value={username}
             placeholder={"Username"}
             onChangeText={(text) => setUsername(text)}
             autoCapitalize={"none"}
           />
         <StyledTextInput
-          style={StyledInputLabel}
+          // style={StyledInputLabel}
           value={password}
           placeholder={"Password"}
           secureTextEntry

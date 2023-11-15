@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, ScrollView, RefreshControl } from 'react-native';
+import { StyleSheet, Text, View, Alert, ScrollView, RefreshControl, } from 'react-native';
 import { DataTable } from "react-native-paper";
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,7 +16,9 @@ import {
   StyledTextInput,
   Colors,
   StyledButton,
-  ButtonText
+  ButtonText,
+  StyledButton2,
+  ButtonText2,
 } from './../styling/styles';
 
 
@@ -24,7 +26,6 @@ export default function MainPage({navigation}) {
   const [posts, setPosts] = useState([]);
   const [username, setUsername] = useState('');
   const [refreshing, setRefreshing] = useState(false); // New state for refreshing
-
 
   const query = async () => {
     try {
@@ -62,6 +63,15 @@ export default function MainPage({navigation}) {
     navigation.navigate("AddSong");
   } 
 
+  const toView = (id, artist,song, rating) => {
+    AsyncStorage.setItem("id", id.toString());
+    AsyncStorage.setItem("artist", artist);
+    AsyncStorage.setItem("song", song);
+    AsyncStorage.setItem("rating", rating.toString());
+    const ff = id.toString();
+    Alert.alert(ff);
+  } 
+
   const handleRefresh = () => {
     setRefreshing(true); // Set refreshing to true before making the query
     // The useEffect hook will be triggered due to the change in the refreshing state
@@ -73,31 +83,19 @@ export default function MainPage({navigation}) {
       <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
     }>
     <View style={styles.container}>
-      <Text>You are logged in as: {username}</Text>
+      <PageTitle>RevMixer</PageTitle>
+      <PageSubtitle>You are logged in as: {username}</PageSubtitle>
       <StyledButton onPress={() => handleAdd()}>
             <ButtonText>Add a new song!</ButtonText>
             </StyledButton>
-      <DataTable>
-        <DataTable.Header>
-          <DataTable.Title>ID</DataTable.Title>
-          <DataTable.Title>Username</DataTable.Title>
-          <DataTable.Title>Artist</DataTable.Title>
-          <DataTable.Title>Song</DataTable.Title>
-          <DataTable.Title>Rating</DataTable.Title>
-        </DataTable.Header>
+    
         {posts.map((r, i) => (
-          <DataTable.Row key={i}>
-            <DataTable.Cell>{r.id}</DataTable.Cell>
-            <DataTable.Cell>{r.username}</DataTable.Cell>
-            <DataTable.Cell>{r.artist}</DataTable.Cell>
-            <DataTable.Cell>{r.song}</DataTable.Cell>
-            <DataTable.Cell>{r.rating}</DataTable.Cell>
-            {/* <button type="submit" onClick={() => handleUpdate(r.id, r.artist, r.song)}>
-                                <FaEdit color="white" />
-                                </button> */}
-          </DataTable.Row>
+            <StyledButton2 onPress={() => toView(r.id,r.artist,r.song,r.rating)}>
+              <ButtonText2>
+                {r.id} | {r.artist} | {r.song} | {r.rating} | 
+                </ButtonText2>
+                </StyledButton2>
         ))}
-      </DataTable>
     </View>
     </ScrollView>
   );

@@ -8,10 +8,10 @@ export const Colors = {
     tertiary:"#1F2937",
     darkLight:"#9CA3AF",
     brand: "#6D28D9",
-    green:"#10B981",
-    red: "EF4444",
+    bbackground: "#D1B0FF",
+    bborder: "#9B55FF"
 };
-const { primary, secondary, tertiary, darkLight, brand, green,red} = Colors;
+const { primary, secondary, tertiary, brand, bbackground, bborder} = Colors;
 // so bar doesn't go over the boundaries
 export const StyledContainer = styled.View`
     flex: 1;
@@ -35,6 +35,15 @@ export const PageTitle = styled.Text`
     color: ${brand};
     padding:10px;
 `;
+
+export const PageTitle2 = styled.Text`
+    font-size:45px;
+    text-align: center;
+    font-weight: bold;
+    color: ${brand};
+    padding:10px;
+`;
+
 export const PageSubtitle = styled.Text`
     font-size:18px;
     margin-bottom: 20px;
@@ -72,8 +81,25 @@ export const StyledButton = styled.TouchableOpacity`
     height: 60px;
 `;
 
+export const StyledButton2 = styled.TouchableOpacity`
+    width: 80%;
+    background-color: ${bbackground};
+    justify-content: center;
+    border-radius: 5px;
+    margin-vertical: 5px;
+    height: 60px;
+    border: 2px solid ${bborder};
+`;
+
 export const ButtonText = styled.Text`
     color: ${primary};
+    font-size: 16px;
+    text-align: center;
+    
+`;
+
+export const ButtonText2 = styled.Text`
+    color: "#ffffff";
     font-size: 16px;
     text-align: center;
     
