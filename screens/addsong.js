@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Rating, AirbnbRating } from 'react-native-ratings';
+import axios from 'axios';
 // import addsong from './App.js';
 
 import {
