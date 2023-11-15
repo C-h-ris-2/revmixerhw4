@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Alert, ScrollView, RefreshControl, } from 'react-native';
-import { DataTable } from "react-native-paper";
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Star, Staro} from 'react-native-vector-icons/AntDesign';
 
 import {
-  StyledContainer,
-  InnerContainer,
-  PageLogo,
   PageTitle,
   PageSubtitle,
-  StyledFormArea,
-  StyledInputLabel,
-  StyledTextInput,
-  Colors,
   StyledButton,
   ButtonText,
   StyledButton2,
   ButtonText2,
 } from './../styling/styles';
 
+function Stars(props){
+  const starNum = props.id;
+  const stars = [];
+  for (let i = 1; i <= 5; i++) {
+      if (i <= starNum) {
+        stars.push(<Star key={i} color="gold"/>); // Filled star icon
+      } else {
+        stars.push(<Staro key={i} color="gold"/>); // Empty star icon
+      }
+  }
+  return <span>
+      {stars}
+  </span>
+}
 
 export default function MainPage({navigation}) {
   const [posts, setPosts] = useState([]);
@@ -99,7 +106,7 @@ export default function MainPage({navigation}) {
         {posts.map((r, i) => (
             <StyledButton2 onPress={() => toView(r.id, r.username, r.artist,r.song,r.rating)}>
               <ButtonText2>
-                {r.id} | {r.username} | {r.artist} | {r.song} | {r.rating} | 
+                {r.id} | {r.username} | {r.artist} | {r.song} | {r.rating} | <Stars id={r.rating}/>
                 </ButtonText2>
                 </StyledButton2>
         ))}

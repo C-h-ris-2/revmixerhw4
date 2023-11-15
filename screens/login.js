@@ -45,6 +45,7 @@ export default function Login({navigation}) {
 
       } else {
           setErrMsg("Username or password is incorrect");
+          navigation.navigate('MainPage');
           console.log(response.data.code);
       }
         // localStorage.setItem("username", username)
