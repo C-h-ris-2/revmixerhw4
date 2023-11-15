@@ -25,6 +25,7 @@ import {
 export default function MainPage({navigation}) {
   const [posts, setPosts] = useState([]);
   const [username, setUsername] = useState('');
+  const [username1, setUsername1] = useState('');
   const [refreshing, setRefreshing] = useState(false); // New state for refreshing
 
   const query = async () => {
@@ -63,13 +64,12 @@ export default function MainPage({navigation}) {
     navigation.navigate("AddSong");
   } 
 
-  const toView = (id, artist,song, rating) => {
+  const toView = ( id, username1, artist,song, rating) => {
     AsyncStorage.setItem("id", id.toString());
     AsyncStorage.setItem("artist", artist);
     AsyncStorage.setItem("song", song);
+    AsyncStorage.setItem("username1", username1);
     AsyncStorage.setItem("rating", rating.toString());
-    const ff = id.toString();
-    Alert.alert(ff);
     navigation.navigate("View");
   } 
 
@@ -78,11 +78,18 @@ export default function MainPage({navigation}) {
     // The useEffect hook will be triggered due to the change in the refreshing state
   }
 
+  const Logout = () => {
+    navigation.navigate("Login");
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer} refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
     }>
     <View style={styles.container}>
+    <StyledButton onPress={() => Logout()}>
+    <ButtonText>Log out</ButtonText>
+    </StyledButton>
       <PageTitle>RevMixer</PageTitle>
       <PageSubtitle>You are logged in as: {username}</PageSubtitle>
       <StyledButton onPress={() => handleAdd()}>
@@ -90,9 +97,9 @@ export default function MainPage({navigation}) {
             </StyledButton>
     
         {posts.map((r, i) => (
-            <StyledButton2 onPress={() => toView(r.id,r.artist,r.song,r.rating)}>
+            <StyledButton2 onPress={() => toView(r.id, r.username, r.artist,r.song,r.rating)}>
               <ButtonText2>
-                {r.id} | {r.artist} | {r.song} | {r.rating} | 
+                {r.id} | {r.username} | {r.artist} | {r.song} | {r.rating} | 
                 </ButtonText2>
                 </StyledButton2>
         ))}

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import axios from 'axios';
 import { StyleSheet, Text, View } from 'react-native';
 import { Rating, AirbnbRating } from 'react-native-ratings';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // import addsong from './App.js';
 
 import {
@@ -23,21 +25,38 @@ export default function Update({navigation}) {
   const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
   const[rating, setRating] = useState('');
+  const[id, setId] = useState('');
+
 
   useEffect(() => {
-    const fetchUsername = async () => {
+    const fetchID = async () => {
       try {
-        const storedUsername = await AsyncStorage.getItem("username");
-        if (storedUsername) {
-          setUsername(storedUsername);
+        const storedID = await AsyncStorage.getItem("id");
+        if (storedID) {
+          setId(storedID);
         }
       } catch (error) {
-        console.error('Error fetching username', error);
+        console.error('Error fetching id', error);
       }
     };
 
-    fetchUsername();
+    fetchID();
   }, []);
+
+  // useEffect(() => {
+  //   const fetchUsername = async () => {
+  //     try {
+  //       const storedUsername = await AsyncStorage.getItem("username");
+  //       if (storedUsername) {
+  //         setUsername(storedUsername);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching username', error);
+  //     }
+  //   };
+
+  //   fetchUsername();
+  // }, []);
 
   useEffect(() => {
     const fetchArtist = async () => {
@@ -114,7 +133,6 @@ export default function Update({navigation}) {
         <StyledTextInput
           value={song}
           placeholder={song}
-          secureTextEntry
           onChangeText={(text) => setSong(text)}
         />
         <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />

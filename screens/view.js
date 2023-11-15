@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Alert } from 'react-native';
+import { Alert, ScrollView } from 'react-native';
 import { DataTable } from "react-native-paper";
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -26,6 +26,22 @@ export default function View({navigation}) {
   const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
   const[rating, setRating] = useState('');
+  const[username1, setUsername1] = useState('');
+
+  useEffect(() => {
+    const fetchUsername1 = async () => {
+      try {
+        const storedUsername1 = await AsyncStorage.getItem("username1");
+        if (storedUsername1) {
+          setUsername1(storedUsername1);
+        }
+      } catch (error) {
+        console.error('Error fetching username', error);
+      }
+    };
+
+    fetchUsername1();
+  }, []);
 
   useEffect(() => {
     const fetchID = async () => {
@@ -108,8 +124,17 @@ export default function View({navigation}) {
   }
 
   const Delete = () => {
-    Alert.alert("poopoo");
-  }
+    axios
+    .post('http://172.21.76.243:8080/comp333-hw3-frontend/index.php/user/deletesong', {id})
+    .then((response) => {
+      console.log(response.data.msg);
+      navigation.navigate('MainPage');
+      // You can redirect to a login page or display a success message here
+    })
+    .catch((error) => {
+      console.error('Registration error:', error);
+      // Handle the registration error here
+    });  }
 
   const Cancel = () => {
     navigation.navigate("MainPage");
@@ -117,6 +142,7 @@ export default function View({navigation}) {
 
 
   return (
+    <ScrollView>
     <StyledContainer>
         <InnerContainer>
         <PageLogo resizeMode="cover" source={require('./../assets/RevMixer_logo_RA.png')}></PageLogo>
@@ -126,17 +152,21 @@ export default function View({navigation}) {
           <PageSubtitle2>Artist: {artist}</PageSubtitle2>
           <PageSubtitle2>Song: {song}</PageSubtitle2>
           <StyledFormArea>
-          <StyledButton type="submit" onClick={() => {toUpdate()}}>
+            {username1 === username && (
+                <>
+          <StyledButton type="submit" onPress={() => {toUpdate()}}>
             <ButtonText>
               Update Rating
             </ButtonText>
           </StyledButton>
-          <StyledButton type="submit" onClick={() => {Delete()}}>
+          <StyledButton type="submit" onPress={() => {Delete()}}>
             <ButtonText>
               Delete Rating
             </ButtonText>
           </StyledButton>
-          <StyledButton type="submit" onClick={() => {Cancel()}}>
+          </>
+        )}
+          <StyledButton type="submit" onPress={() => {Cancel()}}>
             <ButtonText>
               Go Back
             </ButtonText>
@@ -144,6 +174,7 @@ export default function View({navigation}) {
           </StyledFormArea>
         </InnerContainer>
     </StyledContainer>
+    </ScrollView>
   )
 
 }
