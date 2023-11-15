@@ -56,6 +56,10 @@ export default function AddSong({navigation}) {
   const toCancel = () => {
     navigation.navigate('MainPage');
   }
+  const ratingCompleted = (rate) => {
+    console.log("Rating is: " + rate)
+    setRating(rate)
+  }
 
   return (
     <StyledContainer>
@@ -71,16 +75,16 @@ export default function AddSong({navigation}) {
         <StyledTextInput
           value={song}
           placeholder={"Song"}
-          secureTextEntry
+          autoCapitalize={"none"}
           onChangeText={(text) => setSong(text)}
         />
-        <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
-        <StyledButton type="submit" onClick={() => {handleAdd()}}>
+        <Rating style={{ maxWidth: 250 }} value={rating}   onFinishRating={ratingCompleted()}/>
+        <StyledButton type="submit" onPress={() => {handleAdd()}}>
             <ButtonText>
               Submit
             </ButtonText>
           </StyledButton>
-          <StyledButton type="submit" onClick={() => navigation.navigate('MainPage')}>
+          <StyledButton type="submit" onPress={() => toCancel()}>
             <ButtonText>
               Cancel
             </ButtonText>
