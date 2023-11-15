@@ -20,11 +20,13 @@ import {
 } from './../styling/styles';
 // import addsong from './App.js';
 
+// ... (previous imports)
+
 export default function AddSong({navigation}) {
   const [username, setUsername] = useState('');
   const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
-  const[rating, setRating] = useState('');
+  const [rating, setRating] = useState(0); // Initialize with 0 or any default value
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -43,22 +45,23 @@ export default function AddSong({navigation}) {
 
   const handleAdd = () => {
     axios
-    .post('http://172.21.76.243:8080/comp333-hw3-frontend/index.php/user/songinsert', {username, artist, song, rating})
-    .then((response) => {
-      console.log(response.data.msg);
-      navigation.navigate("MainPage");
-    })
-    .catch((error) => {
-      console.error("Error adding new song: ", error);
-    });
+      .post('http://172.21.76.243:8080/comp333-hw3-frontend/index.php/user/songinsert', {username, artist, song, rating})
+      .then((response) => {
+        console.log(response.data.msg);
+        navigation.navigate("MainPage");
+      })
+      .catch((error) => {
+        console.error("Error adding new song: ", error);
+      });
   };
 
   const toCancel = () => {
     navigation.navigate('MainPage');
   }
+
   const ratingCompleted = (rate) => {
     console.log("Rating is: " + rate)
-    setRating(rate)
+    setRating(rate);
   }
 
   return (
@@ -66,20 +69,24 @@ export default function AddSong({navigation}) {
       <InnerContainer>
         <PageTitle>Add A New Song!</PageTitle>
         <StyledFormArea>
-        <StyledTextInput
+          <StyledTextInput
             value={artist}
             placeholder={"Artist"}
             onChangeText={(text) => setArtist(text)}
             autoCapitalize={"none"}
           />
-        <StyledTextInput
-          value={song}
-          placeholder={"Song"}
-          autoCapitalize={"none"}
-          onChangeText={(text) => setSong(text)}
-        />
-        <Rating style={{ maxWidth: 250 }} value={rating}   onFinishRating={ratingCompleted()}/>
-        <StyledButton type="submit" onPress={() => {handleAdd()}}>
+          <StyledTextInput
+            value={song}
+            placeholder={"Song"}
+            autoCapitalize={"none"}
+            onChangeText={(text) => setSong(text)}
+          />
+          <Rating
+            style={{ maxWidth: 250 }}
+            value={rating}
+            onFinishRating={ratingCompleted} // Pass the function reference without invoking it
+          />
+          <StyledButton type="submit" onPress={() => handleAdd()}>
             <ButtonText>
               Submit
             </ButtonText>
@@ -89,7 +96,7 @@ export default function AddSong({navigation}) {
               Cancel
             </ButtonText>
           </StyledButton>
-          </StyledFormArea>
+        </StyledFormArea>
       </InnerContainer>
     </StyledContainer>
   );
