@@ -21,7 +21,6 @@ import {
 } from './../styling/styles';
 // import addsong from './App.js';
 
-// ... (previous imports)
 
 export default function AddSong({navigation}) {
   const [username, setUsername] = useState('');

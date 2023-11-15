@@ -5,6 +5,7 @@ import Register from './screens/register';
 import MainPage from './screens/mainpage';
 import AddSong from './screens/addsong';
 import Update from './screens/update';
+import View from './screens/view';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator(); 
@@ -18,6 +19,7 @@ const App = () => {
                 <Stack.Screen name = "MainPage" component={MainPage} options = {{title:'Mainpage', cardstyle: {backgroundColor: '#ADF4CC'}}} />
                 <Stack.Screen name = "AddSong" component={AddSong} options = {{title:'Add Song', cardstyle: {backgroundColor: '#ADF4CC'}}} />
                 <Stack.Screen name = "Update" component={Update} options = {{title:'Update Song', cardstyle: {backgroundColor: '#ADF4CC'}}} />
+                <Stack.Screen name = "View" component={View} options = {{title: 'View', cardstyle: {backgroundColor: '#ADF4CC'}}}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

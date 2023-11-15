@@ -77,6 +77,14 @@ export default function MainPage({navigation}) {
     // The useEffect hook will be triggered due to the change in the refreshing state
   }
 
+  const handleUpdate = (id, artist, song, rating) => {
+    AsyncStorage.setItem("id", id);
+    AsyncStorage.setItem("artist", artist);
+    AsyncStorage.setItem("song", song);
+    AsyncStorage.setItem("rating", rating);
+    navigation.navigate("Update");
+}
+
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer} refreshControl={
