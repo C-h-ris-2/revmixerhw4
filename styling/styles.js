@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import Constants from 'expo-constants';
 const StatusBarHeight = Constants.statusBarHeight;
 export const Colors = {
-    primary: "#ffffff",
+    primary: "#FFFFFF",
     secondary: "#E5E7EB",
     tertiary:"#1F2937",
     darkLight:"#9CA3AF",
@@ -52,6 +52,16 @@ export const PageSubtitle = styled.Text`
     font-weight: bold;
     color: ${tertiary};
 `;
+
+export const PageSubtitle2 = styled.Text`
+    font-size:18px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-align: left;
+    font-weight: bold;
+    color: ${tertiary};
+`;
+
 export const StyledFormArea = styled.View`
     width: 90%;
 `;

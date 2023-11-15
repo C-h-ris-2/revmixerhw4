@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, ScrollView, RefreshControl } from 'react-native';
+import { Alert } from 'react-native';
 import { DataTable } from "react-native-paper";
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,6 +11,7 @@ import {
   PageLogo,
   PageTitle,
   PageSubtitle,
+  PageSubtitle2,
   StyledFormArea,
   StyledInputLabel,
   StyledTextInput,
@@ -20,11 +21,26 @@ import {
 } from './../styling/styles';
 
 export default function View({navigation}) {
-    const [artist, setArtist] = useState('');
+  const [id, setID] = useState('');
+  const [username, setUsername] = useState('');
+  const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
   const[rating, setRating] = useState('');
-  const[username, setUsername] = useState('');
 
+  useEffect(() => {
+    const fetchID = async () => {
+      try {
+        const storedID = await AsyncStorage.getItem("id");
+        if (storedID) {
+          setID(storedID);
+        }
+      } catch (error) {
+        console.error('Error fetching id', error);
+      }
+    };
+
+    fetchID();
+  }, []);
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -49,11 +65,12 @@ export default function View({navigation}) {
           setArtist(storedArtist);
         }
       } catch (error) {
-        console.error('Error fetching username', error);
+        console.error('Error fetching artist', error);
       }
     };
 
     fetchArtist();
+
   }, []);
 
   useEffect(() => {
@@ -64,7 +81,7 @@ export default function View({navigation}) {
           setSong(storedSong);
         }
       } catch (error) {
-        console.error('Error fetching username', error);
+        console.error('Error fetching song', error);
       }
     };
 
@@ -76,27 +93,55 @@ export default function View({navigation}) {
       try {
         const storedRating = await AsyncStorage.getItem("rating");
         if (storedRating) {
-          setUsername(storedRating);
+          setRating(storedRating);
         }
       } catch (error) {
-        console.error('Error fetching username', error);
+        console.error('Error fetching rating', error);
       }
     };
 
     fetchRating();
   }, []);
 
-  const handleUpdate = () => {
+  const toUpdate = () => {
     navigation.navigate("Update");
   }
+
+  const Delete = () => {
+    Alert.alert("poopoo");
+  }
+
+  const Cancel = () => {
+    navigation.navigate("MainPage");
+  }
+
 
   return (
     <StyledContainer>
         <InnerContainer>
         <PageLogo resizeMode="cover" source={require('./../assets/RevMixer_logo_RA.png')}></PageLogo>
           <PageTitle>Song view</PageTitle>
-          <Text>You are logged in as: {username}</Text>
-            
+          <PageSubtitle>You are logged in as: {username}</PageSubtitle>
+          <PageSubtitle2>ID: {id}</PageSubtitle2>
+          <PageSubtitle2>Artist: {artist}</PageSubtitle2>
+          <PageSubtitle2>Song: {song}</PageSubtitle2>
+          <StyledFormArea>
+          <StyledButton type="submit" onClick={() => {toUpdate()}}>
+            <ButtonText>
+              Update Rating
+            </ButtonText>
+          </StyledButton>
+          <StyledButton type="submit" onClick={() => {Delete()}}>
+            <ButtonText>
+              Delete Rating
+            </ButtonText>
+          </StyledButton>
+          <StyledButton type="submit" onClick={() => {Cancel()}}>
+            <ButtonText>
+              Go Back
+            </ButtonText>
+          </StyledButton>
+          </StyledFormArea>
         </InnerContainer>
     </StyledContainer>
   )

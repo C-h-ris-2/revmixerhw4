@@ -70,21 +70,13 @@ export default function MainPage({navigation}) {
     AsyncStorage.setItem("rating", rating.toString());
     const ff = id.toString();
     Alert.alert(ff);
+    navigation.navigate("View");
   } 
 
   const handleRefresh = () => {
     setRefreshing(true); // Set refreshing to true before making the query
     // The useEffect hook will be triggered due to the change in the refreshing state
   }
-
-  const handleUpdate = (id, artist, song, rating) => {
-    AsyncStorage.setItem("id", id);
-    AsyncStorage.setItem("artist", artist);
-    AsyncStorage.setItem("song", song);
-    AsyncStorage.setItem("rating", rating);
-    navigation.navigate("Update");
-}
-
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer} refreshControl={
