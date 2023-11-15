@@ -102,7 +102,7 @@ export const StyledButton2 = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text`
-    color: ${primary};
+    color: white;
     font-size: 16px;
     text-align: center;
     
