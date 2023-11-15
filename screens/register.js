@@ -28,6 +28,7 @@ export default function Register({navigation}){
       .post('http://172.21.76.243:8080/comp333-hw3-frontend/index.php/user/create', {username, password})
       .then((response) => {
         console.log(response.data.msg);
+        navigation.navigate('Login');
         // localStorage.setItem("username", username)
       })
       .catch((error) =>{
@@ -42,7 +43,7 @@ export default function Register({navigation}){
   }
 
   const toLogin = () => {
-    console.loh("you have created an account!");
+    console.log("you have created an account!");
     navigation.navigate('Login');
   }
 
@@ -74,7 +75,7 @@ export default function Register({navigation}){
       secureTextEntry
       onChangeText={(text) => setPassword2(text)}
     />
-   <StyledButton onPress={() => signUp()}>
+   <StyledButton onPress={() => handleRegister()}>
         <ButtonText>Sign Up!</ButtonText>
         </StyledButton>
         <StyledButton onPress={() => toLogin()}>
