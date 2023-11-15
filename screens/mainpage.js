@@ -34,6 +34,7 @@ export default function MainPage({navigation}) {
   const [username, setUsername] = useState('');
   const [username1, setUsername1] = useState('');
   const [refreshing, setRefreshing] = useState(false); // New state for refreshing
+  const[search, setSearch] = useState('');
 
   const query = async () => {
     try {
@@ -71,6 +72,8 @@ export default function MainPage({navigation}) {
     navigation.navigate("AddSong");
   } 
 
+  
+
   const toView = ( id, username1, artist,song, rating) => {
     AsyncStorage.setItem("id", id.toString());
     AsyncStorage.setItem("artist", artist);
@@ -98,6 +101,16 @@ export default function MainPage({navigation}) {
     <ButtonText>Log out</ButtonText>
     </StyledButton>
       <PageTitle>RevMixer</PageTitle>
+      <PageSubtitle>Search</PageSubtitle>
+          <StyledFormArea>
+          <StyledTextInput
+            // style={StyledInputLabel}
+            value={search}
+            placeholder={"Search"}
+            onChangeText={(text) => setSearch(text)}
+            autoCapitalize={"none"}
+          />
+          </StyledFormArea>
       <PageSubtitle>You are logged in as: {username}</PageSubtitle>
       <StyledButton onPress={() => handleAdd()}>
             <ButtonText>Add a new song!</ButtonText>
