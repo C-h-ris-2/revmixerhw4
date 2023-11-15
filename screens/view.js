@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, FlatList, ScrollView, RefreshControl } from 'react-native';
+import { DataTable } from "react-native-paper";
 import axios from 'axios';
-import { StyleSheet, Text, View } from 'react-native';
-import { Rating, AirbnbRating } from 'react-native-ratings';
-// import addsong from './App.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   StyledContainer,
@@ -19,10 +19,12 @@ import {
   ButtonText
 } from './../styling/styles';
 
-export default function Update({navigation}) {
-  const [artist, setArtist] = useState('');
+export default function View({navigation}) {
+    const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
   const[rating, setRating] = useState('');
+  const[username, setUsername] = useState('');
+
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -84,52 +86,19 @@ export default function Update({navigation}) {
     fetchRating();
   }, []);
 
-  const handleAdd = () => {
-    axios
-        .post('http://172.21.76.243:8080/comp333-hw3-frontend/index.php/user/updatesong', {id,artist,song,rating})
-        .then((response) => {
-          console.log(id);
-          console.log(response.data.msg);
-          navigation.navigate("MainPage");
-          // You can redirect to a login page or display a success message here
-        })
-        .catch((error) => {
-          console.error('Registration error:', error);
-          // Handle the registration error here
-        });
-  };
-
+  const handleUpdate = () => {
+    navigation.navigate("Update");
+  }
 
   return (
     <StyledContainer>
-      <InnerContainer>
-        <PageTitle>Update Song</PageTitle>
-        <StyledFormArea>
-        <StyledTextInput
-            value={artist}
-            placeholder={artist}
-            onChangeText={(text) => setArtist(text)}
-            autoCapitalize={"none"}
-          />
-        <StyledTextInput
-          value={song}
-          placeholder={song}
-          secureTextEntry
-          onChangeText={(text) => setSong(text)}
-        />
-        <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
-        <StyledButton type="submit" onClick={() => {handleAdd()}}>
-            <ButtonText>
-              Submit
-            </ButtonText>
-          </StyledButton>
-          <StyledButton type="submit" onClick={() => navigation.navigate('MainPage')}>
-            <ButtonText>
-              Cancel
-            </ButtonText>
-          </StyledButton>
-          </StyledFormArea>
-      </InnerContainer>
+        <InnerContainer>
+        <PageLogo resizeMode="cover" source={require('./../assets/RevMixer_logo_RA.png')}></PageLogo>
+          <PageTitle>Song view</PageTitle>
+          <Text>You are logged in as: {username}</Text>
+            
+        </InnerContainer>
     </StyledContainer>
-  );
+  )
+
 }

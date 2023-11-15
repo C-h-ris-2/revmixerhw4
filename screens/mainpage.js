@@ -67,6 +67,14 @@ export default function MainPage({navigation}) {
     // The useEffect hook will be triggered due to the change in the refreshing state
   }
 
+  const handleUpdate = (id, artist, song, rating) => {
+    AsyncStorage.setItem("id", id);
+    AsyncStorage.setItem("artist", artist);
+    AsyncStorage.setItem("song", song);
+    AsyncStorage.setItem("rating", rating);
+    navigation.navigate("Update");
+}
+
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer} refreshControl={
@@ -84,6 +92,7 @@ export default function MainPage({navigation}) {
           <DataTable.Title>Artist</DataTable.Title>
           <DataTable.Title>Song</DataTable.Title>
           <DataTable.Title>Rating</DataTable.Title>
+          <DataTable.Title>Actions</DataTable.Title>
         </DataTable.Header>
         {posts.map((r, i) => (
           <DataTable.Row key={i}>
@@ -92,9 +101,19 @@ export default function MainPage({navigation}) {
             <DataTable.Cell>{r.artist}</DataTable.Cell>
             <DataTable.Cell>{r.song}</DataTable.Cell>
             <DataTable.Cell>{r.rating}</DataTable.Cell>
-            {/* <button type="submit" onClick={() => handleUpdate(r.id, r.artist, r.song)}>
-                                <FaEdit color="white" />
-                                </button> */}
+            <DataTable.Cell>{r.username === username && (
+              <>
+              <StyledButton type="submit" onPress={() => handleUpdate(r.id, r.artist, r.song, r.rating)}> 
+              <ButtonText>
+              Update
+              </ButtonText>
+              </StyledButton>
+              {/* <Button type="submit" onClick={() => handleDelete(r.id)}> Delete
+              </Button> */}
+
+              </>
+              )}
+              </DataTable.Cell>
           </DataTable.Row>
         ))}
       </DataTable>
