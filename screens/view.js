@@ -126,12 +126,12 @@ export default function View({navigation}) {
           <PageSubtitle2>Artist: {artist}</PageSubtitle2>
           <PageSubtitle2>Song: {song}</PageSubtitle2>
           <StyledFormArea>
-          <StyledButton type="submit" onClick={() => {toUpdate()}}>
+          <StyledButton type="submit" onClick={() => toUpdate()}>
             <ButtonText>
               Update Rating
             </ButtonText>
           </StyledButton>
-          <StyledButton type="submit" onClick={() => {Delete()}}>
+          <StyledButton type="submit" onClick={() => Delete()}>
             <ButtonText>
               Delete Rating
             </ButtonText>
