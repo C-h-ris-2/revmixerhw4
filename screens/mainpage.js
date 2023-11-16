@@ -12,10 +12,12 @@ import {
   ButtonText,
   StyledButton2,
   ButtonText2,
+  StyledFormArea,
+  StyledTextInput
 } from './../styling/styles';
 
 function Stars(props){
-  const starNum = props.id;
+  const starNum = props;
   const stars = [];
   for (let i = 1; i <= 5; i++) {
       if (i <= starNum) {
