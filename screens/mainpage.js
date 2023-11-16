@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Alert, ScrollView, RefreshControl, } from 'react-native';
 import { DataTable } from "react-native-paper";
@@ -25,9 +25,8 @@ import {
 export default function MainPage({navigation}) {
   const [posts, setPosts] = useState([]);
   const [username, setUsername] = useState('');
-  const [username1, setUsername1] = useState('');
   const [refreshing, setRefreshing] = useState(false); // New state for refreshing
-  const[search, setSearch] = useState('');
+  const [search, setSearch] = useState('');
 
   const query = async () => {
     try {
@@ -65,8 +64,6 @@ export default function MainPage({navigation}) {
     navigation.navigate("AddSong");
   } 
 
-  
-
   const toView = ( id, username1, artist,song, rating) => {
     AsyncStorage.setItem("id", id.toString());
     AsyncStorage.setItem("artist", artist);
@@ -84,7 +81,7 @@ export default function MainPage({navigation}) {
   const Logout = () => {
     navigation.navigate("Login");
   }
-
+  
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer} refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
@@ -94,22 +91,20 @@ export default function MainPage({navigation}) {
     <ButtonText>Log out</ButtonText>
     </StyledButton>
       <PageTitle>RevMixer</PageTitle>
-      <PageSubtitle>Search</PageSubtitle>
-          <StyledFormArea>
-          <StyledTextInput
-            // style={StyledInputLabel}
-            value={search}
-            placeholder={"Search"}
-            onChangeText={(text) => setSearch(text)}
-            autoCapitalize={"none"}
-          />
-          </StyledFormArea>
+      <Text>Search by song!</Text>
+      <StyledTextInput
+          type='text'
+          placeholder="Search..."
+          className="search"
+          onChangeText={(text) => setSearch(text)} // Use onChangeText instead of onChange
+        />       
       <PageSubtitle>You are logged in as: {username}</PageSubtitle>
       <StyledButton onPress={() => handleAdd()}>
             <ButtonText>Add a new song!</ButtonText>
             </StyledButton>
     
-        {posts.map((r, i) => (
+        {posts.filter((r) =>
+        r.song.toLowerCase().includes(search.toLowerCase())).map((r) => (
             <StyledButton2 onPress={() => toView(r.id, r.username, r.artist,r.song,r.rating)}>
               <ButtonText2>
                 {r.id} | {r.username} | {r.artist} | {r.song} | {r.rating} | 
