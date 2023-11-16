@@ -136,12 +136,12 @@ export default function Update({navigation}) {
           onChangeText={(text) => setSong(text)}
         />
         <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
-        <StyledButton type="submit" onClick={() => {handleAdd()}}>
+        <StyledButton type="submit" onPress={() => {handleAdd()}}>
             <ButtonText>
               Submit
             </ButtonText>
           </StyledButton>
-          <StyledButton type="submit" onClick={() => navigation.navigate('MainPage')}>
+          <StyledButton type="submit" onPress={() => navigation.navigate('MainPage')}>
             <ButtonText>
               Cancel
             </ButtonText>
