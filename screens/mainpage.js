@@ -116,7 +116,7 @@ export default function MainPage({navigation}) {
         r.song.toLowerCase().includes(search.toLowerCase())).map((r) => (
             <StyledButton2 onPress={() => toView(r.id, r.username, r.artist,r.song,r.rating)}>
               <ButtonText2>
-                {r.id} | {r.username} | {r.artist} | {r.song} | {r.rating} | <Stars id={r.rating}/>
+                {r.id} | {r.username} | {r.artist} | {r.song} | {r.rating} 
                 </ButtonText2>
                 </StyledButton2>
         ))}
